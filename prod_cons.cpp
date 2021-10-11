@@ -84,8 +84,8 @@ int main(int argc, char* argv[]) {
   int32_t sources_per_thread = t_sources_count / (thread_count / 2);
   Source_queue global_queue;
 #pragma omp parallel for
-  for (int i = 0; i < thread_count; i++) {
-    if (i < thread_count / 2) {
+  for (int32_t thread_id = 0; thread_id < thread_count; ++thread_id) {
+    if (thread_id < thread_count / 2) {
       int32_t local_spt = sources_per_thread;
       while(local_spt--){
         omp_set_lock(&insert_mutex);
